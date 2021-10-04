@@ -2,44 +2,43 @@
 $is_auth = rand(0, 1);
 
 $user_name = 'Богдан'; // укажите здесь ваше имя
-
-$categories=["Доски и лыжи","Крепления","Ботинки","Одежда","Инструменты","Разное"];
-$advertisement=[
+$categories = ["Доски и лыжи", "Крепления", "Ботинки", "Одежда", "Инструменты", "Разное"];
+$advertisement = [
     [
-        'name'=>'2014 Rossignol District Snowboard',
-        'category'=>'Доски и лыжи',
-        'price'=>10999,
-        'img_url'=>'img/lot-1.jpg'
+        'name' => '2014 Rossignol District Snowboard',
+        'category' => 'Доски и лыжи',
+        'price' => 10999,
+        'img_url' => 'img/lot-1.jpg',
     ],
     [
-        'name'=>'DC Ply Mens 2016/2017 Snowboard',
-        'category'=>'Доски и лыжи',
-        'price'=>159999,
-        'img_url'=>'img/lot-2.jpg'
+        'name' => 'DC Ply Mens 2016/2017 Snowboard',
+        'category' => 'Доски и лыжи',
+        'price' => 159999,
+        'img_url' => 'img/lot-2.jpg',
     ],
     [
-        'name'=>'Крепления Union Contact Pro 2015 года размер L/XL',
-        'category'=>'Крепления',
-        'price'=>8000,
-        'img_url'=>'img/lot-3.jpg'
+        'name' => 'Крепления Union Contact Pro 2015 года размер L/XL',
+        'category' => 'Крепления',
+        'price' => 8000,
+        'img_url' => 'img/lot-3.jpg',
     ],
     [
-        'name'=>'Ботинки для сноуборда DC Mutiny Charocal',
-        'category'=>'Ботинки',
-        'price'=>10999,
-        'img_url'=>'img/lot-4.jpg'
+        'name' => 'Ботинки для сноуборда DC Mutiny Charocal',
+        'category' => 'Ботинки',
+        'price' => 10999,
+        'img_url' => 'img/lot-4.jpg',
     ],
     [
-        'name'=>'Куртка для сноуборда DC Mutiny Charocal',
-        'category'=>'Одежда',
-        'price'=>7500,
-        'img_url'=>'img/lot-5.jpg'
+        'name' => 'Куртка для сноуборда DC Mutiny Charocal',
+        'category' => 'Одежда',
+        'price' => 7500,
+        'img_url' => 'img/lot-5.jpg',
     ],
     [
-        'name'=>'Маска Oakley Canopy',
-        'category'=>'Разное',
-        'price'=>5400,
-        'img_url'=>'img/lot-6.jpg'
+        'name' => 'Маска Oakley Canopy',
+        'category' => 'Разное',
+        'price' => 5400,
+        'img_url' => 'img/lot-6.jpg',
     ]
 ];
 ?>
@@ -68,7 +67,7 @@ $advertisement=[
 
         <nav class="user-menu">
             
-            <?php if($is_auth==1): ?> 
+            <?php if ($is_auth == 1): ?> 
                 <div class="user-menu__logged">
                     <p><?php print($user_name); ?></p>
                     <a class="user-menu__bets" href="pages/my-bets.html">Мои ставки</a>
@@ -95,9 +94,9 @@ $advertisement=[
         <p class="promo__text">На нашем интернет-аукционе ты найдёшь самое эксклюзивное сноубордическое и горнолыжное снаряжение.</p>
 
         <ul class="promo__list">
-            <?php foreach($categories as $category): ?>
+            <?php foreach ($categories as $category): ?>
             <li class="promo__item promo__item--boards">
-                <a class="promo__link" href="pages/all-lots.html"><?= $category ?></a>
+                <a class="promo__link" href="pages/all-lots.html"><?= htmlspecialchars($category) ?></a>
             </li>
             <?php endforeach; ?>
         </ul>
@@ -109,7 +108,7 @@ $advertisement=[
         </div>
 
         <ul class="lots__list">
-            <?php foreach($advertisement as $advertisements): ?>
+            <?php foreach ($advertisement as $advertisements): ?>
             <li class="lots__item lot">
                 <div class="lot__image">
                     <img src="<?= $advertisements['img_url'] ?>" width="350" height="260" alt="">
@@ -138,7 +137,7 @@ $advertisement=[
     <nav class="nav">
 
         <ul class="nav__list container">
-            <?php foreach($categories as $category): ?>
+            <?php foreach ($categories as $category): ?>
             <li class="nav__item">
                 <a href="pages/all-lots.html"><?= $category ?></a>
             </li>
