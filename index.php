@@ -43,14 +43,13 @@ $advertisement = [
 ];
 
 // Функция показа цены карточки
-function costs_of_item($a)
+function costs_of_item(float $price): string
 {
-    $a = htmlspecialchars($a);
-    ceil($a);
-    if ($a > 1000) {
-        $a = number_format($a, 0, '', ' ');
+    ceil($price);
+    if ($price > 1000) {
+        $price = number_format($price, 0, '', ' ');
     };
-    return $a . ' ' . '₽';
+    return $price . ' ' . '₽';
 };
 
 ?>
@@ -131,7 +130,7 @@ function costs_of_item($a)
                     <div class="lot__state">
                         <div class="lot__rate">
                             <span class="lot__amount"><?= $advertisements['price'] ?></span>
-                            <span class="lot__cost"><?= htmlspecialchars(costs_of_item($advertisements['price'])) ?></span>
+                            <span class="lot__cost"><?= costs_of_item($advertisements['price']) ?></span>
                         </div>
                         <div class="lot__timer timer">
                             12:23
