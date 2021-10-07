@@ -41,6 +41,17 @@ $advertisement = [
         'img_url' => 'img/lot-6.jpg',
     ]
 ];
+
+// Функция показа цены карточки
+function costs_of_item(float $price): string
+{
+    ceil($price);
+    if ($price > 1000) {
+        $price = number_format($price, 0, '', ' ');
+    };
+    return $price . ' ' . '₽';
+};
+
 ?>
 <!DOCTYPE html>
 <html lang="ru">
@@ -119,7 +130,7 @@ $advertisement = [
                     <div class="lot__state">
                         <div class="lot__rate">
                             <span class="lot__amount"><?= $advertisements['price'] ?></span>
-                            <span class="lot__cost"><?= $advertisements['price'] ?><b class="rub">р</b></span>
+                            <span class="lot__cost"><?= costs_of_item($advertisements['price']) ?></span>
                         </div>
                         <div class="lot__timer timer">
                             12:23
