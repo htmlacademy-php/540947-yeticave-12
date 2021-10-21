@@ -9,36 +9,42 @@ $advertisement = [
         'category' => 'Доски и лыжи',
         'price' => 10999,
         'img_url' => 'img/lot-1.jpg',
+        'end_time' => '2021-10-22',
     ],
     [
         'name' => 'DC Ply Mens 2016/2017 Snowboard',
         'category' => 'Доски и лыжи',
         'price' => 159999,
         'img_url' => 'img/lot-2.jpg',
+        'end_time' => '2021-11-22',
     ],
     [
         'name' => 'Крепления Union Contact Pro 2015 года размер L/XL',
         'category' => 'Крепления',
         'price' => 8000,
         'img_url' => 'img/lot-3.jpg',
+        'end_time' => '2021-12-13',
     ],
     [
         'name' => 'Ботинки для сноуборда DC Mutiny Charocal',
         'category' => 'Ботинки',
         'price' => 10999,
         'img_url' => 'img/lot-4.jpg',
+        'end_time' => '2021-10-29',
     ],
     [
         'name' => 'Куртка для сноуборда DC Mutiny Charocal',
         'category' => 'Одежда',
         'price' => 7500,
         'img_url' => 'img/lot-5.jpg',
+        'end_time' => '2021-12-01',
     ],
     [
         'name' => 'Маска Oakley Canopy',
         'category' => 'Разное',
         'price' => 5400,
         'img_url' => 'img/lot-6.jpg',
+        'end_time' => '2021-12-31',
     ]
 ];
 
@@ -50,6 +56,19 @@ function costs_of_item(float $price): string
         $price = number_format($price, 0, '', ' ');
     };
     return $price . ' ' . '₽';
+}; 
+
+date_default_timezone_set("Europe/Moscow");
+//Функция подсчета оставшегося время до даты из будущего
+function diff_in_time($time_end)
+{
+    $time_end = strtotime($time_end);
+    $final_time = $time_end - time();
+//Расчет часов и минут до конца ставки
+    $hours = floor($final_time / 3600);
+    $minutes = floor(($final_time % 3600) / 60);
+    $minutes = str_pad($minutes, 2, 0, STR_PAD_LEFT);
+    return [$hours, $minutes];
 };
 
 require_once('helpers.php');

@@ -19,6 +19,7 @@
 
         <ul class="lots__list">
             <?php foreach ($advertisement as $advertisements): ?>
+            <?php list($hour, $minut) = diff_in_time($advertisements['end_time']); ?>
             <li class="lots__item lot">
                 <div class="lot__image">
                     <img src="<?= $advertisements['img_url'] ?>" width="350" height="260" alt="">
@@ -31,8 +32,8 @@
                             <span class="lot__amount"><?= $advertisements['price'] ?></span>
                             <span class="lot__cost"><?= costs_of_item($advertisements['price']) ?></span>
                         </div>
-                        <div class="lot__timer timer">
-                            12:23
+                        <div class="lot__timer timer <?php echo $hour<1 ? 'timer--finishing' : '' ?>">
+                            <?= $hour . ':' . $minut ?>
                         </div>
                     </div>
                 </div>
