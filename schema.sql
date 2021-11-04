@@ -31,9 +31,9 @@ CREATE TABLE lot (
     start_price INT NOT NULL,
     date_end DATETIME(0) NOT NULL,
     bet_step INT,
-    FOREIGN KEY (users_id) REFERENCES users(id),
-    FOREIGN KEY (winner_id) REFERENCES users(id),
-    FOREIGN KEY (category_id) REFERENCES category(id)
+    FOREIGN KEY (users_id) REFERENCES users(id) on update cascade on delete cascade,
+    FOREIGN KEY (winner_id) REFERENCES users(id) on update cascade on delete cascade,
+    FOREIGN KEY (category_id) REFERENCES category(id) on update cascade on delete cascade
 );
 
 CREATE TABLE bet (
@@ -42,8 +42,8 @@ CREATE TABLE bet (
     lot_id INT NOT NULL,
     dt_add DATETIME DEFAULT CURRENT_TIMESTAMP,
     final_price DECIMAL,
-    FOREIGN KEY (users_id) REFERENCES users(id),
-    FOREIGN KEY (lot_id) REFERENCES lot(id)
+    FOREIGN KEY (users_id) REFERENCES users(id) on update cascade on delete cascade,
+    FOREIGN KEY (lot_id) REFERENCES lot(id) on update cascade on delete cascade
 );
 
 
