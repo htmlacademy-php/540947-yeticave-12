@@ -14,7 +14,7 @@ $advertisement = [
     [
         'name' => 'DC Ply Mens 2016/2017 Snowboard',
         'category' => 'Доски и лыжи',
-        'price' => 159999,
+        'price' => 15999,
         'img_url' => 'img/lot-2.jpg',
         'end_time' => '2021-11-22',
     ],
