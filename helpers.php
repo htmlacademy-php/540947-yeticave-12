@@ -144,3 +144,29 @@ function include_template($name, array $data = []) {
 }
 
 
+/** Функция показа округленной цены карточки со знаком рубля
+ * @param float $price Проверяемая цена
+ * @return string Итоговый цена со знаком рубля
+*/
+function costs_of_item(float $price): string
+{
+    ceil($price);
+    if ($price > 1000) {
+        $price = number_format($price, 0, '', ' ');
+    };
+    return $price . ' ' . '₽';
+}; 
+
+/** Функция подсчета оставшегося время до даты из будущего(финальной даты конца лота)
+ * @param $time_end Финальная дата конца лота
+ * @return array Выводит массив значений часов и минут до конца лота
+ */
+function diff_in_time($time_end)
+{
+    $time_end = strtotime($time_end);
+    $final_time = $time_end - time();
+//Расчет часов и минут до конца ставки
+    $hours = str_pad(floor($final_time / 3600), 2, 0, STR_PAD_LEFT);
+    $minutes = str_pad(floor(($final_time % 3600) / 60), 2, 0, STR_PAD_LEFT);
+    return [$hours, $minutes];
+};
