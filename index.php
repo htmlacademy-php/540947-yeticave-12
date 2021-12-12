@@ -8,12 +8,12 @@ $is_auth = rand(0, 1);
 $user_name = 'Богдан'; // укажите здесь ваше имя
 
 //Выполнение запроса на показ новых лотов
-$show_new_lot = $mysqli->query("SELECT l.id, l.name_lot, l.start_price, l.img_path, MAX(b.final_price) total_price, c.title, l.date_end 
+$show_new_lot = $mysqli->query("SELECT l.id, l.name_lot, l.start_price, l.img_path, c.title, l.date_end
                             FROM lot l
-                                INNER JOIN bet b ON l.id = b.lot_id
-                                INNER JOIN category c ON l.category_id = c.id
+                                JOIN category c ON l.category_id = c.id
                             WHERE l.date_end > NOW()
-                            GROUP BY b.lot_id");
+                            ORDER BY l.dt_add DESC
+                            LIMIT 6");
 
 //Получение записей в виде ассоциативного массива
 $new_lot = $show_new_lot->fetch_all(MYSQLI_ASSOC);

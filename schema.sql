@@ -21,9 +21,9 @@ CREATE TABLE users (
 
 CREATE TABLE lot (
     id INT AUTO_INCREMENT PRIMARY KEY,
-    users_id INT NOT NULL,
-    winner_id INT NOT NULL,
-    category_id INT NOT NULL, 
+    users_id INT UNSIGNED,
+    winner_id INT UNSIGNED,
+    category_id INT UNSIGNED, 
     dt_add DATETIME DEFAULT CURRENT_TIMESTAMP,
     name_lot VARCHAR(255) NOT NULL,
     description_lot TEXT,
@@ -38,8 +38,8 @@ CREATE TABLE lot (
 
 CREATE TABLE bet (
     id INT AUTO_INCREMENT PRIMARY KEY,
-    users_id INT NOT NULL,
-    lot_id INT NOT NULL,
+    users_id INT UNSIGNED,
+    lot_id INT UNSIGNED,
     dt_add DATETIME DEFAULT CURRENT_TIMESTAMP,
     final_price DECIMAL,
     FOREIGN KEY (users_id) REFERENCES users(id) on update cascade on delete cascade,
