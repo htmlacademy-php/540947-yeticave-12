@@ -155,7 +155,7 @@ function costs_of_item(float $price): string
         $price = number_format($price, 0, '', ' ');
     };
     return $price . ' ' . '₽';
-}; 
+} 
 
 /** Функция подсчета оставшегося время до даты из будущего(финальной даты конца лота)
  * @param $time_end Финальная дата конца лота
@@ -169,78 +169,77 @@ function diff_in_time($time_end)
     $hours = str_pad(floor($final_time / 3600), 2, 0, STR_PAD_LEFT);
     $minutes = str_pad(floor(($final_time % 3600) / 60), 2, 0, STR_PAD_LEFT);
     return [$hours, $minutes];
-};
+}
 
 /** Функция для сохранения введёных значений в полях формы
  * @param $name имя поля отправляемой формы 
  */
 function getPostVal($name) {
     return $_POST[$name] ?? '';
-};
+}
 
 /** Проверяет выбрана ли категория лота из списка.
  * @param $value
  * @param $cats_ids
- * @return string
+ * @return void
  */
 function validateCategoryId($value, $cats_ids)
 {
     if (!in_array($value, $cats_ids)) {
         return "Выберите категорию из списка";
     }
-};
+}
 
 /** Фукнция проверки стартовой цены. Стартовая цена не должна быть равна нулю
  * @param float $start_price Ввод начальной цены
- * @return string
+ * @return void
  */
 function validateStartPrice($start_price) {
-    if ($start_price <= 0) {
+    if ($start_price <= 0 || is_string($start_price)) {
         return "Сумма должна быть больше 0";
     }
-};
+}
 
 /** Фукнция проверки цены ставки. Цена ставки не должна быть равна нулю и должна быть целым числом
  * @param  int $step_p Ввод начальной цены
- * @return string
+ * @return void
  */
 function validateStep($step_p) {
-    if ($step_p <= 0 || !is_int($step_p)) {
+    if ($step_p <= 0 || !is_int($step_p) || is_string($step_p)) {
         return "Сумма ставки должна быть целым числом и больше 0";
     }
-};
+}
 
 /** Функция проверки финальной даты лота. Дата лота должна быть больше текущей даты хотя бы на один день.
  * @param date Ввод финальной даты окончания лота
- * @return string
+ * @return void
  */
 function validateDate($date) {
     if (is_date_valid($date) && diff_in_time($date)[0] < "24") {
         return "Финальная дата лота должна быть больше текущей даты хотя бы на 1 день";
     }
-};
+}
 
 
 /** Валидация формы
- * @param $form
- * @param $rules
- * @param $required
+ * @param $form Данные из формы
+ * @param $rules Правила валидации формы
+ * @param $required Обязательные для заполнения поля
  * @return array
  */
 function form_validation($form, $rules, $required)
 {
     $errors = [];
     foreach ($form as $key => $value) {
-        if (in_array($key, $required) && empty($value)) {
-            $errors[$key] = "Заполните это поле";
-        } elseif (isset($rules[$key])) {
+        if (isset($rules[$key])) {
             $rule = $rules[$key];
             $validationResult = $rule($value);
-            if ($validationResult) {
-                $errors[$key] = $validationResult;
+            $errors[$key] = $validationResult;
             }
+        if (in_array($key, $required) && empty($value)) {
+            $errors[$key] = "Заполните это поле";
+        } 
         }
-    }
 
     return $errors;
 }
