@@ -220,6 +220,26 @@ function validateDate($date) {
     }
 }
 
+/** Функция проверки корректности ввода Email.
+ * @param string $name Email вводимый пользователем
+ * @return void
+ */
+function validateEmail($name) {
+    if (!filter_var($name, FILTER_VALIDATE_EMAIL)){
+        return "Введите корректный Email адресс";
+    }
+}
+
+/** Функция проверки длинны ввода данных в поле формы.
+ * @param string $name 
+ * @return void
+ */
+function validateLength($name, $min, $max) {
+    $len = strlen($name);
+    if ($len < $min || $len > $max){
+        return "Значение должно быть от $min до $max символов";
+    }
+}
 
 /** Валидация формы
  * @param $form Данные из формы
