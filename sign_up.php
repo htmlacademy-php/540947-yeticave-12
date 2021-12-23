@@ -2,13 +2,10 @@
 require ('init.php');
 require ('helpers.php');
 
-$is_auth = rand(0, 1);
-
-$user_name = 'Богдан';
 $page_content = include_template('sign_up_temp.php', ['categories' => $all_categories]);
 
 //HTML-код всей страницы
-$default_layout = include_template('layout.php', ['main_content' => $page_content, 'title' => 'Регистрация', 'user_name' => $user_name, 'categories' => $all_categories, 'is_auth' => $is_auth]);
+$default_layout = include_template('layout.php', ['main_content' => $page_content, 'title' => 'Регистрация', 'categories' => $all_categories]);
 
 if ($_SERVER ['REQUEST_METHOD'] !== 'POST') {
     print_r($default_layout);
@@ -55,13 +52,13 @@ $sql = "INSERT INTO users (users_name, email, passwords, contacts)
 $stmt = db_get_prepare_stmt($mysqli, $sql, [$_POST['name'], $_POST['email'], password_hash($_POST['password'], PASSWORD_DEFAULT), $_POST['message']]);
 $stmt->execute();
 
-header("Location: /index.php"); 
+header("Location: /login.php"); 
 exit();
 }
 
 $page_content = include_template('sign_up_temp.php', ['errors' => $errors, 'categories' => $all_categories]);
 
 //HTML-код всей страницы
-$layout_content = include_template('layout.php', ['main_content' => $page_content, 'title' => 'Регистрация', 'user_name' => $user_name, 'categories' => $all_categories, 'is_auth' => $is_auth]);
+$layout_content = include_template('layout.php', ['main_content' => $page_content, 'title' => 'Регистрация', 'categories' => $all_categories]);
 
 print($layout_content);
