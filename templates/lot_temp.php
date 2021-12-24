@@ -20,6 +20,7 @@
           <p class="lot-item__description"><?= htmlspecialchars($lots['description_lot']) ?></p>
         </div>
         <div class="lot-item__right">
+          <?php if(isset($_SESSION['user'])): ?>
           <div class="lot-item__state">
           <?php [$hour, $minut] = diff_in_time($lots['date_end']); ?>
             <div class="lot-item__timer timer <?= $hour<1 ? 'timer--finishing' : '' ?>">
@@ -99,6 +100,7 @@
             </table>
           </div>
         </div>
+        <?php endif; ?>
         <?php endforeach; ?>
       </div>
     </section>

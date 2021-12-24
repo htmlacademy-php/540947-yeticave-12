@@ -1,5 +1,4 @@
 <?php
-$is_auth = rand(0, 1);
 require_once('helpers.php');
 require_once('init.php');
 
@@ -27,6 +26,6 @@ if (!$lot) {
 $lot_content = include_template('lot_temp.php', ['lot_info' => $lot, 'category' => $all_categories]);
 
 //HTML-код всей страницы
-$layout_content = include_template('layout.php', ['main_content' => $lot_content, 'title' => 'Интернет-аукцион «YetiCave»', 'user_name' => 'Богдан', 'categories' => $all_categories, 'is_auth' => $is_auth]);
+$layout_content = include_template('layout.php', ['main_content' => $lot_content, 'title' => 'Интернет-аукцион «YetiCave»', 'categories' => $all_categories]);
 
 print($layout_content);
