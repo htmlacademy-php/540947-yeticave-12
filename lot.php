@@ -23,7 +23,7 @@ if (!$lot) {
 }
 
 //HTML-код главной страницы
-$lot_content = include_template('lot_temp.php', ['lot_info' => $lot, 'category' => $all_categories]);
+$lot_content = include_template('lot_temp.php', ['lot_info' => $lot, 'categories' => $all_categories]);
 
 //HTML-код всей страницы
 $layout_content = include_template('layout.php', ['main_content' => $lot_content, 'title' => 'Интернет-аукцион «YetiCave»', 'categories' => $all_categories]);
