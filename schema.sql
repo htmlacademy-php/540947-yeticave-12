@@ -46,5 +46,5 @@ CREATE TABLE bet (
     FOREIGN KEY (lot_id) REFERENCES lot(id) on update cascade on delete cascade
 );
 
-
-
+//Добавили полям полнотекстовый индекс для возможности выполнения поиска
+CREATE FULLTEXT INDEX lot_search ON lot(name_lot, description_lot);
