@@ -21,9 +21,9 @@ CREATE TABLE users (
 
 CREATE TABLE lot (
     id INT AUTO_INCREMENT PRIMARY KEY,
-    users_id INT UNSIGNED,
-    winner_id INT UNSIGNED,
-    category_id INT UNSIGNED, 
+    users_id INT NOT NULL,
+    winner_id INT NOT NULL,
+    category_id INT NOT NULL, 
     dt_add DATETIME DEFAULT CURRENT_TIMESTAMP,
     name_lot VARCHAR(255) NOT NULL,
     description_lot TEXT,
@@ -38,13 +38,15 @@ CREATE TABLE lot (
 
 CREATE TABLE bet (
     id INT AUTO_INCREMENT PRIMARY KEY,
-    users_id INT UNSIGNED,
-    lot_id INT UNSIGNED,
+    users_id INT NOT NULL,
+    lot_id INT NOT NULL,
     dt_add DATETIME DEFAULT CURRENT_TIMESTAMP,
     final_price DECIMAL,
     FOREIGN KEY (users_id) REFERENCES users(id) on update cascade on delete cascade,
     FOREIGN KEY (lot_id) REFERENCES lot(id) on update cascade on delete cascade
 );
 
-//Добавили полям полнотекстовый индекс для возможности выполнения поиска
+-- Добавили полям полнотекстовый индекс для возможности выполнения поиска
 CREATE FULLTEXT INDEX lot_search ON lot(name_lot, description_lot);
+-- Сделал поле winner_id NULLABLE
+ALTER TABLE lot MODIFY COLUMN winner_id INT NULL
