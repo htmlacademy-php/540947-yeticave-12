@@ -1,4 +1,5 @@
 <?php
+date_default_timezone_set("Europe/Kiev");
 /**
  * Проверяет переданную дату на соответствие формату 'ГГГГ-ММ-ДД'
  *
@@ -262,4 +263,27 @@ function form_validation($form, $rules, $required)
         }
 
     return $errors;
+}
+
+function bet_time($times)
+{
+    $users_time = strtotime($times);
+    $time_bet = time() - $users_time;
+
+    if ($time_bet >= 3600 && $time_bet < 3600 * 24) {
+        $hours = floor($time_bet / 3600);
+        $plural = get_noun_plural_form($hours, 'час', 'часа', 'часов');
+        return $hours . ' ' . $plural . ' назад';
+    }
+    elseif ($time_bet >= 60 && $time_bet < 3600) {
+        $minutes = floor(($time_bet % 3600) / 60);
+        $plural = get_noun_plural_form($minutes, 'минута', 'минуты', 'минут');
+        return $minutes . ' ' . $plural . ' назад';
+    }
+    elseif ($time_bet < 60) {
+        $plural = get_noun_plural_form($time_bet, 'секунда', 'секунды', 'секунд');
+        return $time_bet . ' ' . $plural . ' назад';
+    }
+
+    return date('d.m.y в H:i', $users_time);
 }

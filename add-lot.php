@@ -72,8 +72,8 @@ if (!empty($_FILES['lot-img']['tmp_name'])) {
     }
 }
 if (!$errors) {
-$sql = "INSERT INTO lot (name_lot, category_id, description_lot, start_price, bet_step, date_end, img_path, users_id, winner_id)
-        VALUES (?, ?, ?, ?, ?, ?, ?, ?, 2)"; 
+$sql = "INSERT INTO lot (name_lot, category_id, description_lot, start_price, bet_step, date_end, img_path, users_id)
+        VALUES (?, ?, ?, ?, ?, ?, ?, ?)"; 
 $stmt = db_get_prepare_stmt($mysqli, $sql, [$lot['lot-name'], $lot['category'], $lot['message'], $lot['lot-rate'], $lot['lot-step'], $lot['lot-date'], $lot['lot-img'], $_SESSION['user']['id']]);
 $stmt->execute();
 $lot_id = $mysqli->insert_id;

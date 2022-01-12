@@ -34,11 +34,11 @@ $guest_uniq = $mysqli->query("SELECT *
 
 $user = $guest_uniq->fetch_array(MYSQLI_ASSOC);
 
-if (!empty($_POST['email']) & !$user['email']) {
+if (!empty($_POST['email']) && !$user['email']) {
     $errors['email'] = "Такого пользователя не существует";
 }
 
-if (!empty($_POST['password']) & !password_verify($_POST['password'], $user['passwords'])) {
+if (!empty($_POST['password']) && !password_verify($_POST['password'], $user['passwords'])) {
     $errors['password'] = "Введен неправильный пароль";
 }
 
