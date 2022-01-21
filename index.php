@@ -1,6 +1,6 @@
 <?php
-require_once('helpers.php');
-require_once('init.php');
+require ('init.php');
+require ('getwinner.php');
 
 //Выполнение запроса на показ новых лотов
 $show_new_lot = $mysqli->query("SELECT l.id, l.name_lot, l.start_price, l.img_path, c.title, l.date_end
