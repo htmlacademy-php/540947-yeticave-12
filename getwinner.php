@@ -31,8 +31,7 @@ if ($result) {
         $message->to($value['users_email']);
         $message->from("keks@phpdemo.ru");
         $message->subject("Ваша ставка победила");
-        //$message->html($email_content);
-        $message->text("Поздравляем с победой. Перейдите в \"мои ставки\",чтобы связаться с автором объявления");
+        $message->html($email_content);
         // Отправка сообщения
         $mailer = new Mailer($transport);
         $mailer->send($message);
