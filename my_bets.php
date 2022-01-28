@@ -1,6 +1,5 @@
 <?php
 require ('init.php');
-require ('helpers.php');
 
 if (!isset($_SESSION['user'])) {
     http_response_code(403);
@@ -9,7 +8,7 @@ if (!isset($_SESSION['user'])) {
 
 $u_id = $_SESSION['user']['id'];
 
-$sql = "SELECT l.name_lot, l.img_path, l.id, l.winner_id, l.date_end, c.title, b.dt_add, b.final_price, u.contacts
+$sql = "SELECT DISTINCT l.name_lot, l.img_path, l.id, l.winner_id, l.date_end, c.title, b.dt_add, b.final_price, u.contacts
         FROM lot l
             JOIN category c ON l.category_id = c.id 
             JOIN users u ON l.users_id = u.id

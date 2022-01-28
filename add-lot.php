@@ -1,6 +1,5 @@
 <?php
 require ('init.php');
-require ('helpers.php');
 
 if (!isset($_SESSION['user'])) {
     http_response_code(403);

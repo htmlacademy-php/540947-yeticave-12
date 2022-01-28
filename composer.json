@@ -1,0 +1,20 @@
+{
+    "name": "domains/yeticave",
+    "description": "Website for online auction",
+    "type": "project",
+    "license": "MIT",
+    "autoload": {
+        "psr-4": {
+            "Domains\\Yeticave\\": "src/"
+        }
+    },
+    "authors": [
+        {
+            "name": "Bohdan Dobrov",
+            "email": "bov.don.94@gmail.com"
+        }
+    ],
+    "require": {
+        "symfony/mailer": "^5.4"
+    }
+}

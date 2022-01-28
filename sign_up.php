@@ -1,6 +1,5 @@
 <?php
 require ('init.php');
-require ('helpers.php');
 
 $page_content = include_template('sign_up_temp.php', ['categories' => $all_categories]);
 
