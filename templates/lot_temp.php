@@ -1,10 +1,10 @@
 <nav class="nav">
   <ul class="nav__list container">
-        <?php foreach ($categories as $category): ?>
-    <li class="nav__item">
-      <a href="all-lots.html"><?= htmlspecialchars($category['title']) ?></a>
+  <?php foreach($categories as $category):?>
+    <li class="nav__item <?php if($category['title'] == $_GET['category_title']): ?>nav__item--current<?php endif; ?>">
+      <a href="all_lots.php?category_title=<?= htmlspecialchars($category['title']); ?>"><?= htmlspecialchars($category['title']) ?></a>
     </li>
-        <?php endforeach; ?>
+    <?php endforeach; ?>
   </ul>
 </nav>
 <section class="lot-item container"> 
@@ -32,7 +32,7 @@
             Мин. ставка <span><?= htmlspecialchars(costs_of_item($min_bet)) ?></span>
           </div>
         </div>
-        <?php if(isset($_SESSION['user'])): ?>
+        <?php if(isset($_SESSION['user']) && time() <= strtotime($lot_info['date_end']) && !($_SESSION['user']['id'] == $lot_info['users_id']) && !($_SESSION['user']['id'] == $bet_info['0']['users_id'])): ?>
         <form class="lot-item__form" action="lot.php?id=<?= htmlspecialchars($id) ?>" method="post" autocomplete="off">
           <p class="lot-item__form-item form__item <?= !empty($errors) ? 'form__item--invalid' : ''; ?>">
             <label for="cost">Ваша ставка</label>
