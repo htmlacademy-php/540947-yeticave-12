@@ -46,6 +46,18 @@
     </div>
 </header>
 
+<?php if(isset($navigation) != true): ?>
+<nav class="nav">
+  <ul class="nav__list container">
+  <?php foreach($categories as $category):?>
+    <li class="nav__item <?php if($category['id'] === $_GET['category_id']): ?>nav__item--current<?php endif; ?>">
+      <a href="all_lots.php?category_id=<?= htmlspecialchars($category['id']); ?>"><?= htmlspecialchars($category['title']) ?></a>
+    </li>
+    <?php endforeach; ?>
+  </ul>
+</nav>
+<?php endif; ?>
+
 <main class="container"><?= $main_content; ?></main>
 
 </div>
@@ -56,7 +68,7 @@
         <ul class="nav__list container">
             <?php foreach ($categories as $category): ?>
             <li class="nav__item">
-                <a href="all_lots.php?category_title=<?= htmlspecialchars($category['title']); ?>"><?= htmlspecialchars($category['title']) ?></a>
+                <a href="all_lots.php?category_id=<?= htmlspecialchars($category['id']); ?>"><?= htmlspecialchars($category['title']) ?></a>
             </li>
             <?php endforeach; ?>
         </ul>

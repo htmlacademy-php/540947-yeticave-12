@@ -17,7 +17,7 @@ $new_lot = $show_new_lot->fetch_all(MYSQLI_ASSOC);
 $page_content = include_template('main.php', ['categories' => $all_categories, 'advertisement' => $new_lot]);
 
 //HTML-код всей страницы
-$layout_content = include_template('layout.php', ['main_content' => $page_content, 'title' => 'Интернет-аукцион «YetiCave»', 'categories' => $all_categories]);
+$layout_content = include_template('layout.php', ['main_content' => $page_content, 'title' => 'Интернет-аукцион «YetiCave»', 'categories' => $all_categories, 'navigation' => true]);
 
 print($layout_content);
 

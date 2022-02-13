@@ -1,15 +1,6 @@
-<nav class="nav">
-  <ul class="nav__list container">
-  <?php foreach($categories as $category):?>
-    <li class="nav__item <?php if($category['title'] == $_GET['category_title']): ?>nav__item--current<?php endif; ?>">
-      <a href="all_lots.php?category_title=<?= htmlspecialchars($category['title']); ?>"><?= htmlspecialchars($category['title']) ?></a>
-    </li>
-    <?php endforeach; ?>
-  </ul>
-</nav>
 <div class="container">
 <section class="lots">
-  <h2>Все лоты в категории <span>«<?= htmlspecialchars($category_title) ?>»</span></h2>
+  <h2>Все лоты в категории <span>«<?= htmlspecialchars($category_title['title']) ?>»</span></h2>
   <ul class="lots__list">
   <?php foreach($lots_items as $key => $value): ?>
     <?php [$hour, $minut] = diff_in_time($value['date_end']); ?>
@@ -45,7 +36,7 @@
   </li>
 
   <?php foreach($pages as $page): ?>
-  <li class="pagination-item <?php if($page == $cur_page): ?>pagination-item-active<?php endif; ?>">
+  <li class="pagination-item <?php if($page === $cur_page): ?>pagination-item-active<?php endif; ?>">
     <a href="/all_lots.php?page=<?= htmlspecialchars($page); ?>"><?= $page ?></a>
   </li>
   <?php endforeach; ?>
