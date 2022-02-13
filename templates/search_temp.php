@@ -1,12 +1,3 @@
-<nav class="nav">
-    <ul class="nav__list container">
-        <?php foreach($categories as $category): ?>
-    <li class="nav__item">
-        <a href="all-lots.html"><?= htmlspecialchars($category['title']) ?></a>
-    </li>
-        <?php endforeach; ?>
-    </ul>
-</nav>
 <div class="container">
     <section class="lots">
     <h2>Результаты поиска по запросу «<span><?= htmlspecialchars($search) ?></span>»</h2>
@@ -47,7 +38,7 @@
     </li>
 
     <?php foreach($pages as $page): ?>
-    <li class="pagination-item <?php if($page == $cur_page): ?>pagination-item-active<?php endif; ?>">
+    <li class="pagination-item <?php if($page === $cur_page): ?>pagination-item-active<?php endif; ?>">
         <a href="/search.php?search=<?= htmlspecialchars($search) ?>&page=<?= htmlspecialchars($page) ?>"><?= $page ?></a>
     </li>
     <?php endforeach; ?>

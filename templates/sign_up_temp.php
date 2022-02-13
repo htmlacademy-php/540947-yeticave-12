@@ -1,16 +1,6 @@
-<nav class="nav">
-  <ul class="nav__list container">
-        <?php foreach ($categories as $category): ?>
-    <li class="nav__item">
-      <a href="all-lots.html"><?= htmlspecialchars($category['title']) ?></a>
-    </li>
-        <?php endforeach; ?>
-  </ul>
-</nav>
-<form class="form container <?= !empty($errors) ? 'form--invalid' : ''; ?>" action="sign_up.php" method="post" autocomplete="off"> <!-- form
---invalid -->
+<form class="form container <?= !empty($errors) ? 'form--invalid' : ''; ?>" action="sign_up.php" method="post" autocomplete="off"> 
   <h2>Регистрация нового аккаунта</h2>
-  <div class="form__item <?= !empty($errors['email']) ? 'form__item--invalid' : ''; ?>"> <!-- form__item--invalid -->
+  <div class="form__item <?= !empty($errors['email']) ? 'form__item--invalid' : ''; ?>"> 
     <label for="email">E-mail <sup>*</sup></label>
     <input id="email" type="text" name="email" placeholder="Введите e-mail" value="<?= getPostVal('email'); ?>">
     <?php if (!empty($errors['email'])): ?>
