@@ -1,6 +1,7 @@
 <?php
-require ('init.php');
-require ('helpers.php');
+
+require('init.php');
+require('helpers.php');
 
 $search = trim($_GET['search'] ?? '');
 
@@ -41,9 +42,24 @@ if (isset($search)) {
 }
 
 //HTML-код главной страницы
-$search_content = include_template('search_temp.php', ['search' => $search, 'categories' => $all_categories, 'pages' => $pages, 'cur_page' => $cur_page, 'lots' => $search_final]);
+$search_content = include_template('search_temp.php',
+    [
+        'search' => $search,
+        'categories' => $all_categories,
+        'pages' => $pages,
+        'cur_page' => $cur_page,
+        'lots' => $search_final
+    ]
+);
 
 //HTML-код всей страницы
-$layout_content = include_template('layout.php', ['main_content' => $search_content, 'title' => 'Результаты поиска', 'categories' => $all_categories, 'search' => $search]);
+$layout_content = include_template('layout.php',
+    [
+        'main_content' => $search_content,
+        'title' => 'Результаты поиска',
+        'categories' => $all_categories,
+        'search' => $search
+    ]
+);
 
 print($layout_content);

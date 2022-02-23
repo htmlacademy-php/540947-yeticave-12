@@ -1,6 +1,7 @@
 <?php
-require ('init.php');
-require ('helpers.php');
+
+require('init.php');
+require('helpers.php');
 
 if (!isset($_SESSION['user'])) {
     http_response_code(403);
@@ -10,7 +11,10 @@ if (!isset($_SESSION['user'])) {
 $page_content = include_template('add_temp.php', ['categories' => $all_categories]);
 
 //HTML-код всей страницы
-$default_layout = include_template('layout.php', ['main_content' => $page_content, 'title' => 'Добавление лота', 'categories' => $all_categories]);
+$default_layout = include_template(
+    'layout.php',
+    ['main_content' => $page_content, 'title' => 'Добавление лота', 'categories' => $all_categories]
+);
 
 if ($_SERVER ['REQUEST_METHOD'] !== 'POST') {
     print_r($default_layout);
@@ -34,16 +38,16 @@ $required_items = ['lot-name', 'category', 'message', 'lot-rate', 'lot-step', 'l
 $errors = [];
 
 $rules = [
-    'category' => function($value) use ($cats_ids) {
+    'category' => function ($value) use ($cats_ids) {
         return validateCategoryId($value, $cats_ids);
     },
-    'lot-rate' => function($value) {
+    'lot-rate' => function ($value) {
         return validateStartPrice($value);
     },
-    'lot-step' => function($value) {
+    'lot-step' => function ($value) {
         return validateStep($value);
     },
-    'lot-date' => function($value) {
+    'lot-date' => function ($value) {
         return validateDate($value);
     },
 ];
@@ -72,18 +76,34 @@ if (!empty($_FILES['lot-img']['tmp_name'])) {
     }
 }
 if (!$errors) {
-$sql = "INSERT INTO lot (name_lot, category_id, description_lot, start_price, bet_step, date_end, img_path, users_id)
-        VALUES (?, ?, ?, ?, ?, ?, ?, ?)"; 
-$stmt = db_get_prepare_stmt($mysqli, $sql, [$lot['lot-name'], $lot['category'], $lot['message'], $lot['lot-rate'], $lot['lot-step'], $lot['lot-date'], $lot['lot-img'], $_SESSION['user']['id']]);
-$stmt->execute();
-$lot_id = $mysqli->insert_id;
-header("Location: lot.php?id=" . $lot_id); 
-exit();
+    $sql = "INSERT INTO lot (name_lot, category_id, description_lot, start_price, bet_step, date_end, img_path, users_id)
+        VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
+    $stmt = db_get_prepare_stmt(
+        $mysqli,
+        $sql,
+        [
+            $lot['lot-name'],
+            $lot['category'],
+            $lot['message'],
+            $lot['lot-rate'],
+            $lot['lot-step'],
+            $lot['lot-date'],
+            $lot['lot-img'],
+            $_SESSION['user']['id']
+        ]
+    );
+    $stmt->execute();
+    $lot_id = $mysqli->insert_id;
+    header("Location: lot.php?id=" . $lot_id);
+    exit();
 }
 
 $page_content = include_template('add_temp.php', ['errors' => $errors, 'categories' => $all_categories]);
 
 //HTML-код всей страницы
-$layout_content = include_template('layout.php', ['main_content' => $page_content, 'title' => 'Добавление лота', 'categories' => $all_categories]);
+$layout_content = include_template(
+    'layout.php',
+    ['main_content' => $page_content, 'title' => 'Добавление лота', 'categories' => $all_categories]
+);
 
 print($layout_content);
