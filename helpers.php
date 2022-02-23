@@ -1,4 +1,5 @@
 <?php
+
 date_default_timezone_set("Europe/Kiev");
 /**
  * Проверяет переданную дату на соответствие формату 'ГГГГ-ММ-ДД'
@@ -14,7 +15,8 @@ date_default_timezone_set("Europe/Kiev");
  *
  * @return bool true при совпадении с форматом 'ГГГГ-ММ-ДД', иначе false
  */
-function is_date_valid(string $date) : bool {
+function is_date_valid(string $date): bool
+{
     $format_to_check = 'Y-m-d';
     $dateTimeObj = date_create_from_format($format_to_check, $date);
 
@@ -30,7 +32,8 @@ function is_date_valid(string $date) : bool {
  *
  * @return mysqli_stmt Подготовленное выражение
  */
-function db_get_prepare_stmt($link, $sql, $data = []) {
+function db_get_prepare_stmt($link, $sql, $data = [])
+{
     $stmt = mysqli_prepare($link, $sql);
 
     if ($stmt === false) {
@@ -47,12 +50,14 @@ function db_get_prepare_stmt($link, $sql, $data = []) {
 
             if (is_int($value)) {
                 $type = 'i';
-            }
-            else if (is_string($value)) {
-                $type = 's';
-            }
-            else if (is_double($value)) {
-                $type = 'd';
+            } else {
+                if (is_string($value)) {
+                    $type = 's';
+                } else {
+                    if (is_double($value)) {
+                        $type = 'd';
+                    }
+                }
             }
 
             if ($type) {
@@ -97,9 +102,9 @@ function db_get_prepare_stmt($link, $sql, $data = []) {
  *
  * @return string Рассчитанная форма множественнго числа
  */
-function get_noun_plural_form (int $number, string $one, string $two, string $many): string
+function get_noun_plural_form(int $number, string $one, string $two, string $many): string
 {
-    $number = (int) $number;
+    $number = (int)$number;
     $mod10 = $number % 10;
     $mod100 = $number % 100;
 
@@ -127,7 +132,8 @@ function get_noun_plural_form (int $number, string $one, string $two, string $ma
  * @param array $data Ассоциативный массив с данными для шаблона
  * @return string Итоговый HTML
  */
-function include_template($name, array $data = []) {
+function include_template($name, array $data = [])
+{
     $name = 'templates/' . $name;
     $result = '';
 
@@ -148,7 +154,7 @@ function include_template($name, array $data = []) {
 /** Функция показа округленной цены карточки со знаком рубля
  * @param float $price Проверяемая цена
  * @return string Итоговый цена со знаком рубля
-*/
+ */
 function costs_of_item(float $price): string
 {
     ceil($price);
@@ -156,7 +162,7 @@ function costs_of_item(float $price): string
         $price = number_format($price, 0, '', ' ');
     };
     return $price . ' ' . '₽';
-} 
+}
 
 /** Функция подсчета оставшегося время до даты из будущего(финальной даты конца лота)
  * @param $time_end Финальная дата конца лота
@@ -173,9 +179,10 @@ function diff_in_time($time_end)
 }
 
 /** Функция для сохранения введёных значений в полях формы
- * @param $name имя поля отправляемой формы 
+ * @param $name имя поля отправляемой формы
  */
-function getPostVal($name) {
+function getPostVal($name)
+{
     return $_POST[$name] ?? '';
 }
 
@@ -195,17 +202,19 @@ function validateCategoryId($value, $cats_ids)
  * @param float $start_price Ввод начальной цены
  * @return void
  */
-function validateStartPrice($start_price) {
+function validateStartPrice($start_price)
+{
     if ($start_price <= 0 || is_string($start_price)) {
         return "Сумма должна быть больше 0";
     }
 }
 
 /** Фукнция проверки цены ставки. Цена ставки не должна быть равна нулю и должна быть целым числом
- * @param  int $step_p Ввод начальной цены
+ * @param int $step_p Ввод начальной цены
  * @return void
  */
-function validateStep($step_p) {
+function validateStep($step_p)
+{
     if ($step_p <= 0 || !is_int($step_p) || is_string($step_p)) {
         return "Сумма ставки должна быть целым числом и больше 0";
     }
@@ -215,7 +224,8 @@ function validateStep($step_p) {
  * @param date Ввод финальной даты окончания лота
  * @return void
  */
-function validateDate($date) {
+function validateDate($date)
+{
     if (is_date_valid($date) && diff_in_time($date)[0] < "24") {
         return "Финальная дата лота должна быть больше текущей даты хотя бы на 1 день";
     }
@@ -225,19 +235,21 @@ function validateDate($date) {
  * @param string $name Email вводимый пользователем
  * @return void
  */
-function validateEmail($name) {
-    if (!filter_var($name, FILTER_VALIDATE_EMAIL)){
+function validateEmail($name)
+{
+    if (!filter_var($name, FILTER_VALIDATE_EMAIL)) {
         return "Введите корректный Email адресс";
     }
 }
 
 /** Функция проверки длинны ввода данных в поле формы.
- * @param string $name 
+ * @param string $name
  * @return void
  */
-function validateLength($name, $min, $max) {
+function validateLength($name, $min, $max)
+{
     $len = strlen($name);
-    if ($len < $min || $len > $max){
+    if ($len < $min || $len > $max) {
         return "Значение должно быть от $min до $max символов";
     }
 }
@@ -256,15 +268,18 @@ function form_validation($form, $rules, $required)
             $rule = $rules[$key];
             $validationResult = $rule($value);
             $errors[$key] = $validationResult;
-            }
+        }
         if (in_array($key, $required) && empty($value)) {
             $errors[$key] = "Заполните это поле";
-        } 
         }
+    }
 
     return $errors;
 }
 
+/**
+ * Функция расчета времени, оставшегося на ставки
+ */
 function bet_time($times)
 {
     $users_time = strtotime($times);
@@ -274,13 +289,11 @@ function bet_time($times)
         $hours = floor($time_bet / 3600);
         $plural = get_noun_plural_form($hours, 'час', 'часа', 'часов');
         return $hours . ' ' . $plural . ' назад';
-    }
-    elseif ($time_bet >= 60 && $time_bet < 3600) {
+    } elseif ($time_bet >= 60 && $time_bet < 3600) {
         $minutes = floor(($time_bet % 3600) / 60);
         $plural = get_noun_plural_form($minutes, 'минута', 'минуты', 'минут');
         return $minutes . ' ' . $plural . ' назад';
-    }
-    elseif ($time_bet < 60) {
+    } elseif ($time_bet < 60) {
         $plural = get_noun_plural_form($time_bet, 'секунда', 'секунды', 'секунд');
         return $time_bet . ' ' . $plural . ' назад';
     }

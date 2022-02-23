@@ -1,5 +1,7 @@
 <?php
-require ('init.php');
+
+require('init.php');
+require('helpers.php');
 
 if (!isset($_SESSION['user'])) {
     http_response_code(403);
@@ -22,9 +24,15 @@ $result = $stmt->get_result();
 $my_bet_info = $result->fetch_all(MYSQLI_ASSOC);
 
 //HTML-код главной страницы
-$bet_content = include_template('my_bets_temp.php', ['my_bet_info' => $my_bet_info, 'categories' => $all_categories, 'id' => $u_id]);
+$bet_content = include_template(
+    'my_bets_temp.php',
+    ['my_bet_info' => $my_bet_info, 'categories' => $all_categories, 'id' => $u_id]
+);
 
 //HTML-код всей страницы
-$layout_content = include_template('layout.php', ['main_content' => $bet_content, 'title' => 'Мои ставки', 'categories' => $all_categories]);
+$layout_content = include_template(
+    'layout.php',
+    ['main_content' => $bet_content, 'title' => 'Мои ставки', 'categories' => $all_categories]
+);
 
 print($layout_content);

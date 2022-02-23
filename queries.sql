@@ -28,7 +28,7 @@ VALUES
     ('2', '3', '4', NOW(), 'Куртка для сноуборда DC Mutiny Charocal', 'Отлчиная куртка, мембрана - 10к, в самый раз для комфорной езды в горах', 'img/lot-5.jpg', '7500', '2022-12-31', '500'),
     ('4', '1', '6', NOW(), 'Маска Oakley Canopy', 'Незаменимый атрибут в сильный снегопад', 'img/lot-6.jpg', '5400', '2022-12-07', '100'),
     ('4', '1', '1', NOW(), '2014 Rossignol District Snowboard', 'Прекрасный сноуборд для тех, кто любит фрирайд', 'img/lot-1.jpg', '10999', '2022-12-28', '1000');
-    
+
  /*Добавляем данные в таблицу Ставка*/
 INSERT INTO bet
     (users_id, lot_id, dt_add, final_price)
@@ -44,11 +44,11 @@ VALUES
     ('2', '2', NOW(), '8200');
 
 /*Выводим все категории */
-SELECT * 
+SELECT *
 FROM category;
 
 /*Выводим самые новые лоты */
-SELECT l.name_lot, l.start_price, l.img_path, MAX(b.final_price), c.title 
+SELECT l.name_lot, l.start_price, l.img_path, MAX(b.final_price), c.title
 FROM lot l
     INNER JOIN bet b ON l.id = b.lot_id
     INNER JOIN category c ON l.category_id = c.id
@@ -57,7 +57,7 @@ GROUP BY b.lot_id;
 
 /*Выводим лот по его ID */
 SELECT l.id, l.name_lot, c.title
-FROM lot L
+FROM lot l
     INNER JOIN category c ON l.category_id = c.id
 WHERE l.id = 2;
 
