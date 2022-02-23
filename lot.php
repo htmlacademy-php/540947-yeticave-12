@@ -11,9 +11,10 @@ if (!$id) {
     exit();
 }
 
+
 $show_lot = "SELECT l.name_lot, l.start_price, l.img_path, 
        (SELECT MAX(b.final_price) FROM bet b WHERE b.lot_id = l.id) current_price, 
-       l.bet_step, l.description_lot, c.title, c.title_id, l.date_end 
+       l.bet_step, l.description_lot, c.title, c.title_id, l.date_end, l.users_id
                             FROM lot l
                                 JOIN category c ON l.category_id = c.id
                             WHERE l.id = ?";
@@ -53,8 +54,10 @@ if ($_SERVER ['REQUEST_METHOD'] == 'POST') {
     if (empty($_POST['cost'])) {
         $errors['cost'] = "Заполните это поле";
     }
+    }
 
 
+    if (!empty($_POST['cost']) & (!is_int($bet['cost']) || $bet['cost'] < $min_bet)) {
     if (!empty($_POST['cost']) & (!is_int($bet['cost']) || $bet['cost'] < $min_bet)) {
         $errors['cost'] = "Введите целое число, которое больше или равно минимальной ставки";
     }

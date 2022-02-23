@@ -1,12 +1,3 @@
-<nav class="nav">
-      <ul class="nav__list container">
-            <?php foreach ($categories as $category): ?>
-        <li class="nav__item">
-          <a href="all-lots.html"><?= htmlspecialchars($category['title']) ?></a>
-        </li>
-            <?php endforeach; ?>
-      </ul>
-</nav>
 <form class="form container <?= !empty($errors) ? 'form--invalid' : ''; ?>" action="login.php" method="post"> <!-- form--invalid -->
   <h2>Вход</h2>
   <div class="form__item <?= !empty($errors['email']) ? 'form__item--invalid' : ''; ?>"> <!-- form__item--invalid -->
