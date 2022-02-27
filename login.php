@@ -6,7 +6,6 @@ if (isset($_SESSION['user'])) {
 }
 
 require('init.php');
-require('helpers.php');
 
 $page_content = include_template('login_temp.php', ['categories' => $all_categories]);
 

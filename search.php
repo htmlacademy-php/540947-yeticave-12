@@ -1,7 +1,6 @@
 <?php
 
 require('init.php');
-require('helpers.php');
 
 $search = trim($_GET['search'] ?? '');
 

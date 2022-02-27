@@ -1,4 +1,5 @@
 <?php
+
 require ('init.php');
 
 if (isset($_GET['category_id'])) {

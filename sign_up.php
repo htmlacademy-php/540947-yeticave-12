@@ -1,7 +1,6 @@
 <?php
 
 require('init.php');
-require('helpers.php');
 
 $page_content = include_template('sign_up_temp.php', ['categories' => $all_categories]);
 
@@ -44,8 +43,8 @@ $errors = array_filter($errors);
 $email_guest = $mysqli->real_escape_string($_POST['email']);
 $email_uniq = $mysqli->query(
     "SELECT email 
-                                    FROM users
-                                    WHERE email = '$email_guest'"
+        FROM users
+        WHERE email = '$email_guest'"
 );
 
 if ($email_uniq->num_rows > 0) {

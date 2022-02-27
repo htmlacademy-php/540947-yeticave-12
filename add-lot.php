@@ -1,7 +1,6 @@
 <?php
 
 require('init.php');
-require('helpers.php');
 
 if (!isset($_SESSION['user'])) {
     http_response_code(403);
@@ -69,7 +68,7 @@ if (!empty($_FILES['lot-img']['tmp_name'])) {
     $finfo = finfo_open(FILEINFO_MIME_TYPE);
     $file_type = finfo_file($finfo, $tmp_name);
     $errors['lot-img'] = "Загрузите файл в формате PNG или JPEG";
-    if ($file_type == "image/png" || $file_type == "image/jpeg") {
+    if ($file_type === "image/png" || $file_type === "image/jpeg") {
         unset($errors['lot-img']);
         move_uploaded_file($tmp_name, $file_path . $file_name);
         $lot['lot-img'] = $file_url;

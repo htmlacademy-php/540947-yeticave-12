@@ -165,7 +165,7 @@ function costs_of_item(float $price): string
 }
 
 /** Функция подсчета оставшегося время до даты из будущего(финальной даты конца лота)
- * @param $time_end Финальная дата конца лота
+ * @param string $time_end Финальная дата конца лота
  * @return array Выводит массив значений часов и минут до конца лота
  */
 function diff_in_time($time_end)
@@ -180,6 +180,7 @@ function diff_in_time($time_end)
 
 /** Функция для сохранения введёных значений в полях формы
  * @param $name имя поля отправляемой формы
+ * @return mixed Вывод введеных данных
  */
 function getPostVal($name)
 {
@@ -187,8 +188,8 @@ function getPostVal($name)
 }
 
 /** Проверяет выбрана ли категория лота из списка.
- * @param $value
- * @param $cats_ids
+ * @param $value Категория лота (id)
+ * @param array $cats_ids Массив столбца категорий по id 
  * @return void
  */
 function validateCategoryId($value, $cats_ids)
@@ -221,7 +222,7 @@ function validateStep($step_p)
 }
 
 /** Функция проверки финальной даты лота. Дата лота должна быть больше текущей даты хотя бы на один день.
- * @param date Ввод финальной даты окончания лота
+ * @param string Ввод финальной даты окончания лота
  * @return void
  */
 function validateDate($date)
@@ -243,7 +244,7 @@ function validateEmail($name)
 }
 
 /** Функция проверки длинны ввода данных в поле формы.
- * @param string $name
+ * @param string $name Данные формы
  * @return void
  */
 function validateLength($name, $min, $max)
@@ -255,10 +256,10 @@ function validateLength($name, $min, $max)
 }
 
 /** Валидация формы
- * @param $form Данные из формы
- * @param $rules Правила валидации формы
- * @param $required Обязательные для заполнения поля
- * @return array
+ * @param array $form Данные из формы
+ * @param array $rules Правила валидации формы
+ * @param array $required Обязательные для заполнения поля
+ * @return array Вывод ошибок если они есть
  */
 function form_validation($form, $rules, $required)
 {
@@ -277,8 +278,9 @@ function form_validation($form, $rules, $required)
     return $errors;
 }
 
-/**
- * Функция расчета времени, оставшегося на ставки
+/** Функция расчета времени сделанной ставки
+ * @param string $times Время, когда была сделана ставка
+ * @return string Время, прошедшее с момента ставки
  */
 function bet_time($times)
 {
