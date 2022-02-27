@@ -13,9 +13,9 @@
       <select id="category" name="category">
         <option>Выберите категорию</option>
       <?php foreach ($categories as $category): ?>
-        <option value="<?= $category['id']; ?>" <?= $category['id'] == getPostVal('category') ? 'selected' : ''; ?>>
+        <option value="<?= $category['id']; ?>" <?= $category['id'] === getPostVal('category') ? 'selected' : ''; ?>>
         <?= htmlspecialchars($category['title']) ?></option>
-        <?php endforeach; ?>
+      <?php endforeach; ?>
       </select>
       <?php if (!empty($errors['category'])): ?>
             <span class="form__error"><?= $errors['category']; ?></span>

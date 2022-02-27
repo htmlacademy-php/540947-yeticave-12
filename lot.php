@@ -1,6 +1,5 @@
 <?php
 
-require_once('helpers.php');
 require_once('init.php');
 
 $errors = [];
@@ -46,7 +45,7 @@ $stmt->execute();
 $result = $stmt->get_result();
 $bets_info = $result->fetch_all(MYSQLI_ASSOC);
 
-if ($_SERVER ['REQUEST_METHOD'] == 'POST') {
+if ($_SERVER ['REQUEST_METHOD'] === 'POST') {
     $bet = [
         'cost' => is_numeric($_POST['cost']) ? $_POST['cost'] + 0 : $_POST['cost'],
     ];
@@ -54,10 +53,7 @@ if ($_SERVER ['REQUEST_METHOD'] == 'POST') {
     if (empty($_POST['cost'])) {
         $errors['cost'] = "Заполните это поле";
     }
-    }
 
-
-    if (!empty($_POST['cost']) & (!is_int($bet['cost']) || $bet['cost'] < $min_bet)) {
     if (!empty($_POST['cost']) & (!is_int($bet['cost']) || $bet['cost'] < $min_bet)) {
         $errors['cost'] = "Введите целое число, которое больше или равно минимальной ставки";
     }

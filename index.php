@@ -1,6 +1,5 @@
 <?php
 
-require_once('helpers.php');
 require_once('init.php');
 
 //Выполнение запроса на показ новых лотов

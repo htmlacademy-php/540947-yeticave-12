@@ -3,13 +3,13 @@
   <table class="rates__list">
     <?php foreach($my_bet_info as $bet_info): ?>
     <?php [$hour, $minut] = diff_in_time($bet_info['date_end']); ?>
-    <tr class="rates__item <?= (time() > strtotime($bet_info['date_end']) && $bet_info['winner_id'] == $id) ? 'rates__item--win' : ''; ?> <?= (time() > strtotime($bet_info['date_end']) && $bet_info['winner_id'] !== $id) ? 'rates__item--end' : ''; ?>"> <!-- rates__item--win  rates__item--end-->
+    <tr class="rates__item <?= (time() > strtotime($bet_info['date_end']) && $bet_info['winner_id'] === $id) ? 'rates__item--win' : ''; ?> <?= (time() > strtotime($bet_info['date_end']) && $bet_info['winner_id'] !== $id) ? 'rates__item--end' : ''; ?>"> <!-- rates__item--win  rates__item--end-->
       <td class="rates__info">
         <div class="rates__img">
             <img src="<?= htmlspecialchars($bet_info['img_path']) ?>" width="54" height="40" alt="<?= htmlspecialchars($bet_info['title']) ?>">
         </div>
         <h3 class="rates__title"><a href="lot.php?id=<?= htmlspecialchars($bet_info['id']) ?>"><?= htmlspecialchars($bet_info['name_lot']) ?></a></h3>
-        <?php if($bet_info['winner_id'] == $id): ?>
+        <?php if($bet_info['winner_id'] === $id): ?>
         <p><?= htmlspecialchars($bet_info['contacts']) ?></p>
         <?php endif; ?>
       </td>
@@ -17,7 +17,7 @@
         <?= htmlspecialchars($bet_info['title']) ?>
       </td>
       <!-- Вывод результатов ставок -->
-      <?php if (time() > strtotime($bet_info['date_end']) && $bet_info['winner_id'] == $id): ?>
+      <?php if (time() > strtotime($bet_info['date_end']) && $bet_info['winner_id'] === $id): ?>
         <td class="rates__timer">
         <div class="timer timer--win">Ставка выиграла</div>
       </td>
