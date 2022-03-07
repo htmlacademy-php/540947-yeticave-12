@@ -50,7 +50,7 @@
 <nav class="nav">
   <ul class="nav__list container">
   <?php foreach($categories as $category):?>
-    <li class="nav__item <?php if($category['id'] === $_GET['category_id']): ?>nav__item--current<?php endif; ?>">
+    <li class="nav__item <?= isset($_GET['category_id']) && ($category['id'] == $_GET['category_id']) ? 'nav__item--current' : ''  ?>">
       <a href="all_lots.php?category_id=<?= htmlspecialchars($category['id']); ?>"><?= htmlspecialchars($category['title']) ?></a>
     </li>
     <?php endforeach; ?>
