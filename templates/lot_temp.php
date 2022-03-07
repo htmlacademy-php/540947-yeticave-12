@@ -23,7 +23,7 @@
             Мин. ставка <span><?= htmlspecialchars(costs_of_item($min_bet)) ?></span>
           </div>
         </div>
-        <?php if(isset($_SESSION['user']) && time() <= strtotime($lot_info['date_end']) && $_SESSION['user']['id'] !== $lot_info['users_id'] && !($bet_info && $_SESSION['user']['id'] == $bet_info[0]['users_id'])): ?>
+        <?php if(isset($_SESSION['user']) && time() <= strtotime($lot_info['date_end']) && !($_SESSION['user']['id'] == $lot_info['users_id']) && !($bet_info && $_SESSION['user']['id'] == $bet_info[0]['users_id'])): ?>
         <form class="lot-item__form" action="lot.php?id=<?= htmlspecialchars($id) ?>" method="post" autocomplete="off">
           <p class="lot-item__form-item form__item <?= !empty($errors) ? 'form__item--invalid' : ''; ?>">
             <label for="cost">Ваша ставка</label>

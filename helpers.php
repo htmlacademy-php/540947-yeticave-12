@@ -179,7 +179,7 @@ function diff_in_time($time_end)
 }
 
 /** Функция для сохранения введёных значений в полях формы
- * @param $name имя поля отправляемой формы
+ * @param mixed $name имя поля отправляемой формы
  * @return mixed Вывод введеных данных
  */
 function getPostVal($name)
@@ -188,7 +188,7 @@ function getPostVal($name)
 }
 
 /** Проверяет выбрана ли категория лота из списка.
- * @param $value Категория лота (id)
+ * @param int $value Категория лота (id)
  * @param array $cats_ids Массив столбца категорий по id 
  * @return void
  */

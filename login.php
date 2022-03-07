@@ -47,7 +47,7 @@ if (!empty($_POST['password']) && !password_verify($_POST['password'], $user['pa
     $errors['password'] = "Введен неправильный пароль";
 }
 
-if (!$errors & $user) {
+if (!$errors && $user) {
     $_SESSION['user'] = $user;
 
     header("Location: /index.php");
